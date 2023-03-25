@@ -12,13 +12,13 @@ export const InputEmail = forwardRef<HTMLInputElement, Props>(
         ref={ref}
         type="email"
         aria-invalid={hasError ? "true" : "false"}
-        aria-errormessage={`${props.id}-error`}
         placeholder="メールアドレスを入力してください"
         className={clsx(
           "input",
           "input-bordered",
           "w-full",
           hasError && "input-error",
+          props.className,
         )}
       />
     );

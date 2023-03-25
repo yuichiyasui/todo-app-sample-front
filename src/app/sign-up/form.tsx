@@ -29,6 +29,7 @@ export const Form = () => {
   }
 
   const emailInputId = "email";
+  const emailErrorMessageId = `${emailInputId}-error`;
 
   return (
     <form noValidate onSubmit={handleSubmit(submit)}>
@@ -41,12 +42,13 @@ export const Form = () => {
             required: "メールアドレスが入力されていません",
           })}
           hasError={!!errors.email}
+          aria-errormessage={emailErrorMessageId}
           id={emailInputId}
           placeholder="メールアドレスを入力してください"
         />
         {!!errors.email?.message && (
           <p
-            id={`${emailInputId}-error`}
+            id={emailErrorMessageId}
             aria-live="polite"
             className="text-red-500 text-sm empty:mt-0 mt-2"
           >
