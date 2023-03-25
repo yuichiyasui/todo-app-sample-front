@@ -3,8 +3,9 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { SubmitButton } from "@/components/button";
-import { Label } from "@/components/label";
-import { InputEmail } from "@/components/text-field";
+import { ErrorMessage } from "@/components/form/error-message";
+import { Label } from "@/components/form/label";
+import { InputEmail } from "@/components/form/text-field";
 import { sleep } from "@/utils/sleep";
 
 type Inputs = {
@@ -47,13 +48,11 @@ export const Form = () => {
           placeholder="メールアドレスを入力してください"
         />
         {!!errors.email?.message && (
-          <p
+          <ErrorMessage
             id={emailErrorMessageId}
-            aria-live="polite"
-            className="text-red-500 text-sm empty:mt-0 mt-2"
-          >
-            {errors.email.message}
-          </p>
+            message={errors.email.message}
+            className="mt-2"
+          />
         )}
       </div>
       <SubmitButton disabled={isSubmitting}>メールを送信する</SubmitButton>

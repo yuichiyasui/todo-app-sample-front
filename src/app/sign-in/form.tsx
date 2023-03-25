@@ -3,8 +3,9 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { SubmitButton } from "@/components/button";
-import { Label } from "@/components/label";
-import { InputEmail, InputPassword } from "@/components/text-field";
+import { ErrorMessage } from "@/components/form/error-message";
+import { Label } from "@/components/form/label";
+import { InputEmail, InputPassword } from "@/components/form/text-field";
 import { sleep } from "@/utils/sleep";
 
 type Inputs = {
@@ -47,13 +48,11 @@ export const Form = () => {
             placeholder="todo@example.com"
           />
           {!!errors.email?.message && (
-            <p
+            <ErrorMessage
               id={emailErrorMessageId}
-              aria-live="polite"
-              className="text-red-500 text-sm empty:mt-0 mt-2"
-            >
-              {errors.email.message}
-            </p>
+              message={errors.email.message}
+              className="mt-2"
+            />
           )}
         </div>
         <div className="mb-4">
@@ -70,13 +69,11 @@ export const Form = () => {
             placeholder="パスワードを入力してください"
           />
           {!!errors.password?.message && (
-            <p
+            <ErrorMessage
               id={passwordErrorMessageId}
-              aria-live="polite"
-              className="text-red-500 text-sm empty:mt-0 mt-2"
-            >
-              {errors.password.message}
-            </p>
+              message={errors.password.message}
+              className="mt-2"
+            />
           )}
         </div>
       </div>
