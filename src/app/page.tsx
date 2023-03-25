@@ -1,8 +1,11 @@
+import { Metadata } from "next";
+import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "タスク一覧",
+};
+
 export default function Home() {
-  return (
-    <main>
-      <h1>Todo App</h1>
-      <p>タスク管理アプリケーションです</p>
-    </main>
-  );
+  // TODO: if user has signed in, show todo list
+  redirect("/sign-in");
 }
