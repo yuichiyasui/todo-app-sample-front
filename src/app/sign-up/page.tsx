@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Form } from "./form";
+import { PageTitle } from "@/components/page-title";
 
 export const metadata: Metadata = {
   title: "ユーザー登録",
@@ -7,13 +8,11 @@ export const metadata: Metadata = {
 
 export default function SignUp() {
   return (
-    <main className="pt-4 px-4">
-      <h1 className="text-lg text-center mb-4 font-bold text-stone-700">
-        ユーザー登録
-      </h1>
-      <div className="max-w-sm mx-auto">
+    <main className="p-4">
+      <section className="max-w-md mx-auto border border-gray-300 bg-white rounded p-4">
+        <PageTitle title="ユーザー登録" className="mb-4" />
         <Form />
-      </div>
+      </section>
     </main>
   );
 }

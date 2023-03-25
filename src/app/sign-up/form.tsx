@@ -1,6 +1,8 @@
 "use client";
 
-import clsx from "clsx";
+import { SubmitButton } from "@/components/button";
+import { Label } from "@/components/label";
+import { InputEmail } from "@/components/text-field";
 import { FormEvent, useState } from "react";
 
 const sleep = (seconds: number) => {
@@ -32,7 +34,7 @@ export const Form = () => {
   };
 
   if (sentEmail) {
-    return <p className="text-sm">メールアドレスを送信しました。</p>;
+    return <p className="text-sm text-center">メールアドレスを送信しました</p>;
   }
 
   const emailInputId = "email";
@@ -40,33 +42,17 @@ export const Form = () => {
   return (
     <form noValidate onSubmit={submit}>
       <div className="mb-4">
-        <label
-          htmlFor={emailInputId}
-          className="inline-block mb-2 text-stone-700 text-sm"
-        >
+        <Label htmlFor={emailInputId} className="mb-2">
           メールアドレス
-        </label>
-        <input
+        </Label>
+        <InputEmail
           id={emailInputId}
-          type="email"
           value={email}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
-          aria-invalid={emailError ? "true" : "false"}
-          aria-required="true"
-          aria-errormessage={`${emailInputId}-error`}
+          hasError={!!emailError}
           placeholder="メールアドレスを入力してください"
-          className={clsx(
-            "block",
-            "border",
-            "w-full",
-            "placeholder:text-sm",
-            "py-2",
-            "px-3",
-            "rounded",
-            emailError ? "border-red-500" : "border-gray-300",
-          )}
         />
         {!!emailError && (
           <p
@@ -78,20 +64,7 @@ export const Form = () => {
           </p>
         )}
       </div>
-      <button
-        type="submit"
-        className={clsx([
-          "text-sm",
-          "text-white",
-          "px-4",
-          "py-2",
-          "rounded",
-          canSubmit ? "bg-green-600" : "bg-gray-500/50",
-        ])}
-        disabled={!canSubmit}
-      >
-        メールを送信する
-      </button>
+      <SubmitButton disabled={!canSubmit}>メールを送信する</SubmitButton>
     </form>
   );
 };
