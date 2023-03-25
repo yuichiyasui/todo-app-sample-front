@@ -4,10 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { SubmitButton } from "@/components/button";
 import { Label } from "@/components/label";
 import { InputEmail } from "@/components/text-field";
-
-const sleep = (seconds: number) => {
-  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
-};
+import { sleep } from "@/utils/sleep";
 
 type Inputs = {
   email: string;
