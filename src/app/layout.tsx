@@ -1,7 +1,12 @@
 import "@/styles/globals.css";
 
-export const metadata = {
-  title: "Todo App",
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Todo App",
+    template: "%s | Todo App",
+  },
   description: "タスク管理アプリケーション",
 };
 
