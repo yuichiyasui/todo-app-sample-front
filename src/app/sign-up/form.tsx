@@ -1,70 +1,62 @@
 "use client";
 
+import { SubmitHandler, useForm } from "react-hook-form";
 import { SubmitButton } from "@/components/button";
 import { Label } from "@/components/label";
 import { InputEmail } from "@/components/text-field";
-import { FormEvent, useState } from "react";
 
 const sleep = (seconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 };
 
+type Inputs = {
+  email: string;
+};
+
 export const Form = () => {
-  const [sentEmail, setSentEmail] = useState(false);
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [canSubmit, setCanSubmit] = useState(true);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isSubmitted },
+  } = useForm<Inputs>();
 
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setEmailError("");
-
-    if (!email) {
-      // TODO: validate email
-      setEmailError("メールアドレスを正しく入力してください");
-      return;
-    }
-
-    setCanSubmit(false);
+  const submit: SubmitHandler<Inputs> = async (data) => {
     // TODO: call API to send email
     await sleep(1);
-
-    setSentEmail(true);
-    setEmail("");
+    alert(JSON.stringify(data));
   };
 
-  if (sentEmail) {
+  if (isSubmitted) {
     return <p className="text-sm text-center">メールアドレスを送信しました</p>;
   }
 
   const emailInputId = "email";
 
   return (
-    <form noValidate onSubmit={submit}>
+    <form noValidate onSubmit={handleSubmit(submit)}>
       <div className="mb-4">
         <Label htmlFor={emailInputId} className="mb-2">
           メールアドレス
         </Label>
         <InputEmail
+          {...register("email", {
+            required: "メールアドレスが入力されていません",
+          })}
+          hasError={!!errors.email}
           id={emailInputId}
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-          hasError={!!emailError}
           placeholder="メールアドレスを入力してください"
         />
-        {!!emailError && (
+        {!!errors.email?.message && (
           <p
             id={`${emailInputId}-error`}
             aria-live="polite"
             className="text-red-500 text-sm empty:mt-0 mt-2"
           >
-            {emailError}
+            {errors.email.message}
           </p>
         )}
       </div>
-      <SubmitButton disabled={!canSubmit}>メールを送信する</SubmitButton>
+      <SubmitButton disabled={isSubmitting}>メールを送信する</SubmitButton>
     </form>
   );
 };

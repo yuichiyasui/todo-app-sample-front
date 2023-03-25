@@ -1,23 +1,28 @@
 import clsx from "clsx";
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithRef, forwardRef } from "react";
 
-type Props = { hasError: boolean } & ComponentPropsWithoutRef<"input"> &
-  Required<Pick<ComponentPropsWithoutRef<"input">, "id">>;
+type Props = { hasError: boolean } & ComponentPropsWithRef<"input"> &
+  Required<Pick<ComponentPropsWithRef<"input">, "id">>;
 
-export const InputEmail = (props: Props) => {
-  return (
-    <input
-      {...props}
-      type="email"
-      aria-invalid={props.hasError ? "true" : "false"}
-      aria-errormessage={`${props.id}-error`}
-      placeholder="メールアドレスを入力してください"
-      className={clsx(
-        "input",
-        "input-bordered",
-        "w-full",
-        props.hasError && "input-error",
-      )}
-    />
-  );
-};
+export const InputEmail = forwardRef<HTMLInputElement, Props>(
+  ({ hasError, ...props }, ref) => {
+    return (
+      <input
+        {...props}
+        ref={ref}
+        type="email"
+        aria-invalid={hasError ? "true" : "false"}
+        aria-errormessage={`${props.id}-error`}
+        placeholder="メールアドレスを入力してください"
+        className={clsx(
+          "input",
+          "input-bordered",
+          "w-full",
+          hasError && "input-error",
+        )}
+      />
+    );
+  },
+);
+
+InputEmail.displayName = "InputEmail";
