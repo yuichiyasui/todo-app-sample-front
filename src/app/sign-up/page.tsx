@@ -1,5 +1,7 @@
 import { Metadata } from "next";
+
 import { Form } from "./form";
+
 import { PageTitle } from "@/components/page-title";
 
 export const metadata: Metadata = {

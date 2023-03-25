@@ -1,7 +1,9 @@
-import { PageTitle } from "@/components/page-title";
 import { Metadata } from "next";
+
 import { Form } from "./form";
+
 import { TextLink } from "@/components/link";
+import { PageTitle } from "@/components/page-title";
 
 export const metadata: Metadata = {
   title: "ログイン",
