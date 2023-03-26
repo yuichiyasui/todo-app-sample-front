@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { Metadata } from "next";
 
-import { Header } from "@/components/header";
 import { PageTitle } from "@/components/page-title";
 // import { redirect } from "next/navigation";
 
@@ -68,8 +67,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
-      <main className="max-w-screen-xl mx-auto p-4">
+      <main className="max-w-screen-xl w-full mx-auto p-4">
         <PageTitle title="タスク一覧" className="mb-4" />
 
         <div className="md:grid md:grid-cols-3 md:gap-x-10">
